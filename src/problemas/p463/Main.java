@@ -3,70 +3,89 @@ package problemas.p463;
 
 import java.util.Scanner;
 
-import static problemas.p463.Main.drawScreen;
 
 public class Main {
 
     public static void main(String[] args) {
-        String a =introData();
-        Main.drawScreen(a);
-        System.out.println(" resultat: " + a);
+        String a = introData();
+        int altura = 0; int alturaMaxima = 0;
+        char[][] pos = new char[a.length()][a.length()];
+        alturaMaxima = calcularGrafico(a, altura, alturaMaxima, pos);
+        drawScreen(a, alturaMaxima, pos);
     }
 
-    public static void drawScreen(String a){
 
-        int altura = 0;
-        int[] pos = new int[100];
+    private static void drawScreen(String a, int alturaMaxima, char[][] pos) {
+        for (int i = 0; i < a.length()+2; i++) {
+            System.out.print("#");
+        }
+        System.out.println();
+        for (int i = alturaMaxima; i > -1; i--) {
+            System.out.print("#");
+            for (int j = 0; j < a.length(); j++) {
+                if (pos[i][j] =='\u0000') {  //  \u0000'
+                    System.out.print(' ');
+                } else
+                    System.out.print(pos[i][j]);
+            }
+            System.out.println("#");
+        }
+        for (int i = 0; i < a.length()+2; i++) {
+            System.out.print("#");
+        }
+    }
 
+    private static int calcularGrafico(String a, int altura, int alturaMaxima, char[][] pos) {
         for (int i = 0; i < a.length(); i++) {
 
-            if (a.charAt(i) == 'S') if ( a.charAt(i-1) != 'B' ) altura ++;
-            if (a.charAt(i) == 'B') if ( a.charAt(i-1) != 'S' ) altura --;
-            if ( i > 0){
-                if (a.charAt(i) == 'I') if ( a.charAt(i-1) == 'S' ) altura ++;
-                if (a.charAt(i) == 'I') if ( a.charAt(i-1) == 'B' ) altura --;
+            if ( i < a.length() -1) {
+                if ( a.charAt(i) == 'S' ) {
+                    pos[altura][i] = asignarSigno(a.charAt(i));
+                    if ( a.charAt(i + 1) == 'S') altura++;
+                    if ( a.charAt(i + 1) == 'I') altura++;
+                }
+                if ( a.charAt(i) == 'B' ) {
+                    pos[altura][i] = asignarSigno(a.charAt(i));
+
+                    if ( a.charAt(i + 1) == 'B')  altura--;
+                }
+                if ( a.charAt(i) == 'I' ) {
+                    pos[altura][i] = asignarSigno(a.charAt(i));
+                    if ( a.charAt(i + 1) == 'B')  altura--;
+                }
+            }else{ // ultimo numero
+                pos[altura][i] = asignarSigno(a.charAt(i));
             }
 
-            pos[i] = altura; //todo FER LIST ADD
-            System.out.println(" y: " + ((a.length()-1)-i));
-            System.out.println("posicio: " + pos[i]);
-        }
-        for (int x = 0; x < a.length(); x++) {
-            pos[x] = 0;
-        }
-//        System.out.println("jkl: " + altura);
+            if ( altura > alturaMaxima) alturaMaxima = altura;
+            if (altura < 0) System.exit(0);
 
-//        System.out.format("%"+altura*2+"s%10d", altura, a.length());
-        for (int e = a.length()-1; e > 0; e--) {
-            System.out.format("%"+e+"S%n","X");
         }
+        return alturaMaxima;
     }
+
     public static String introData() {
         Scanner sc = new Scanner(System.in);
-        int counterChar = 0;
-
         boolean correct = true;
         String intro = ""; String chainString = "";
+        //System.out.println("intro: ");
+        intro = sc.nextLine();
 
-        while ( true ){
-            correct = true;
-            System.out.println("intro: ");
-            intro = sc.nextLine();
-            counterChar++;
-            if (intro.length()  > 0 & intro.length() <= 100) {
+        if (intro.length()  > 0 & intro.length() <= 100) {
 
-                for (int i = 0; i < intro.length(); i++) {
+            for (int i = 0; i < intro.length(); i++) {
 
-                    if ( (intro.charAt(i)!= 'I') & (intro.charAt(i)!= 'S') & (intro.charAt(i)!= 'B')){
-                        System.out.println("Only intro (I) (S) (B)");
-                        correct = false;
-                        break;
-                    }
+                if ( (intro.charAt(i)!= 'I') && (intro.charAt(i)!= 'S') && (intro.charAt(i)!= 'B')){
+                    System.exit(0);
                 }
-            }else correct = false;
-
-            if ( correct ) break;
-        }
+            }
+        }else  System.exit(0);
         return intro;
+    }
+    static char asignarSigno(char signo){
+        if( signo == 'S') return '/';
+        if( signo == 'B') return '\\';
+        if( signo == 'I') return '_';
+        return 'x';
     }
 }
