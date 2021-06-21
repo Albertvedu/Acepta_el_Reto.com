@@ -1,10 +1,9 @@
-package problemas.p463;
-
+package problemas;
 
 import java.util.Scanner;
 
 
-public class Main {
+public class P463 {
 
     public static void main(String[] args) {
         String a = introData();
