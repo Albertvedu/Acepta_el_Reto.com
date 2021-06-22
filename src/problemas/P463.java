@@ -2,6 +2,35 @@ package problemas;
 
 import java.util.Scanner;
 
+/**
+ * Entrada
+ * Cada caso de prueba es una cadena de entre 1 y 100 letras, indicando la evolución de la gráfica.
+ * Una "I" indica que la gráfica se mantiene igual que en el paso previo ("_"), una "S" indica que sube una línea
+ * hacia arriba ("/") y una "B" indica que baja una posición "\". Se debe considerar que la "altura" inicial en la
+ * gráfica es 0 y a partir de ahí se mueve en función de lo indicado. Se garantiza que el valor nunca descenderá
+ * de ese mismo 0 y que no habrá letras distintas a las descritas.
+ *
+ * Salida
+ * Por cada caso de prueba se dibujará el panel de ayuda utilizando los caracteres alfanumericos descritos.
+ * La gráfica se enmarcará en un cuadro formado por el carácter "#". El interior del marco tendrá tantas columnas
+ * como letras la entrada, y las filas necesarias para incluir exactamente la gráfica.
+ *
+ * Entrada de ejemplo
+ * IISSBSIIIII
+ * SIISBIB
+ * 
+ * Salida de ejemplo
+ *
+ * #############
+ * #      _____#
+ * #   /\/     #
+ * #__/        #
+ * #############
+ * #########
+ * # __/\_ #
+ * #/     \#
+ * #########
+ */
 
 public class P463 {
 
