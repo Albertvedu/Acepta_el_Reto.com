@@ -6,19 +6,14 @@ import java.util.Scanner;
 public class P470 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int counterLigth = 0;
-        boolean isValid ;
+        int counter = 0;
+        boolean isValid = true;
+        String cadena = sc.nextLine();
+        isValid = isValidIntro(isValid, cadena);
 
-        while(counterLigth < 500000) {
-            isValid = true;
-            String cadena = sc.nextLine();
-            isValid = isValidIntro(isValid, cadena);
-            int counter = 0;
-            if ( counterLigth + cadena.length() > 500000) isValid = false;
-            if ( isValid )   counterLigth += cadena.length();
+        if ( isValid ){
             counter = getSearchLigth(isValid, cadena, counter);
-
-            if ( isValid ) System.out.println(counter);
+            System.out.println(counter);
         }
     }
     private static int getSearchLigth(boolean isValid, String cadena, int counter) {
@@ -37,6 +32,7 @@ public class P470 {
         for (int i = 0; i < cadena.length(); i++) {
             if ((cadena.charAt(i) != 'R') && (cadena.charAt(i) != 'A') && (cadena.charAt(i) != 'V')) isValid = false;
         }
+        if ( cadena.length() > 500000) isValid = false;
         return isValid;
     }
 }
