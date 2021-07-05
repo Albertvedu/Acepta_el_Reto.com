@@ -28,9 +28,9 @@ import java.util.Scanner;
 public class P470 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int counter = 0;
-        boolean isValid = true;
-        String cadena = sc.nextLine();
+        var counter = 0;
+        var isValid = true;
+        var cadena = sc.nextLine();
         isValid = isValidIntro(isValid, cadena);
 
         if ( isValid ){
@@ -39,13 +39,15 @@ public class P470 {
         }
     }
     private static int getSearchLigth(boolean isValid, String cadena, int counter) {
+        String subCadena;
+        String posCadena;
         while ( isValid && cadena.length() > 2 ) {
             int pos = cadena.indexOf("RAV");
             if (pos != -1) {
-                String sSubCadena = cadena.substring(0, pos);
-                String a = cadena.substring(pos + 3);
+                subCadena = cadena.substring(0, pos);
+                posCadena = cadena.substring(pos + 3);
                 counter++;
-                cadena = sSubCadena + a;
+                cadena = subCadena + posCadena;
             } else break;
         }
         return counter;
