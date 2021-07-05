@@ -44,6 +44,7 @@ public class P255 {
         int pos = 0;
         int bestLong = 1;
         boolean coincidencia = false;
+        
         for (int i = 0; i < palabra.length() - 1 ; i++) {
             sortida = searchWord(palabra, pos, coincidencia);
             if ( bestLong < sortida.length()) bestLong = sortida.length();
