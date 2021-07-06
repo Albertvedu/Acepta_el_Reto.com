@@ -32,39 +32,31 @@ package problemas;
  * 4
  * 1
  */
-
-import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Scanner;
 
 public class P255 {
-    public static void main(String[] args) {
-        String palabra = inputWord();
-        String sortida;
-        int pos = 0;
-        int bestLong = 1;
-        boolean coincidencia = false;
-        
-        for (int i = 0; i < palabra.length() - 1 ; i++) {
-            sortida = searchWord(palabra, pos, coincidencia);
-            if ( bestLong < sortida.length()) bestLong = sortida.length();
-            pos ++;
-        }
-        System.out.println(bestLong);
-    }
-    private static String inputWord(){
+    public static void main(String[] args){
+        //Scanner sc = new Scanner(new File("/home/albert/IdeaProjects/Acepta_el_Reto/src/p255"));
         Scanner sc = new Scanner(System.in);
-        String word = "";
-        boolean isValid = false;
-        do {
-            word = sc.nextLine();
-            Pattern pat = Pattern.compile("[a-z]{1,2000}");
-            Matcher mat = pat.matcher(word);
-            if (mat.matches()) {
-                isValid = true;
+        String palabra = " ";
+        while ( palabra.length() != 0 ){ // termina con \n
+            palabra = sc.nextLine();  // no exije ni recomienda filtros.
+            String sortida;
+            int pos = 0;
+            int bestLong = 1;
+            boolean coincidencia = false;
+
+            for (int i = 0; i < palabra.length() - 1 ; i++) {
+                sortida = searchWord(palabra, pos, coincidencia);
+                if ( bestLong < sortida.length()) bestLong = sortida.length();
+                pos ++;
             }
-        } while( !isValid );
-        return word;
+            if ( palabra.length() != 0 ) System.out.println(bestLong);
+        }
     }
     private static String searchWord(String palabra, int pos, boolean coincidencia) {
         int posicio = pos;
