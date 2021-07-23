@@ -1,6 +1,6 @@
 package problemas;
 
-import java.util.Scanner;
+
 
 /**
  * Entrada
@@ -32,14 +32,20 @@ import java.util.Scanner;
  * #########
  */
 
+import java.util.Scanner;
 public class P463 {
 
     public static void main(String[] args) {
-        String a = introData();
-        int altura = 0; int alturaMaxima = 0;
-        char[][] pos = new char[a.length()][a.length()];
-        alturaMaxima = calcularGrafico(a, altura, alturaMaxima, pos);
-        drawScreen(a, alturaMaxima, pos);
+        Scanner sc = new Scanner(System.in);
+
+        while (sc.hasNext()) {
+            String a = introData(sc);
+            int altura = 0; int alturaMaxima = 0;
+            char[][] pos = new char[a.length()][a.length()];
+            alturaMaxima = calcularGrafico(a, altura, alturaMaxima, pos);
+            drawScreen(a, alturaMaxima, pos);
+        }
+
     }
 
 
@@ -61,6 +67,7 @@ public class P463 {
         for (int i = 0; i < a.length()+2; i++) {
             System.out.print("#");
         }
+        System.out.println();
     }
 
     private static int calcularGrafico(String a, int altura, int alturaMaxima, char[][] pos) {
@@ -92,8 +99,8 @@ public class P463 {
         return alturaMaxima;
     }
 
-    public static String introData() {
-        Scanner sc = new Scanner(System.in);
+    public static String introData(Scanner sc) {
+
         boolean correct = true;
         String intro = ""; String chainString = "";
         //System.out.println("intro: ");
